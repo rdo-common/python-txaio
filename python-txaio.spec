@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.0.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
@@ -21,7 +21,7 @@ BuildRequires:  python-pytest-cov
 BuildRequires:  python-mock
 BuildRequires:  python-pep8
 BuildRequires:  python-sphinx
-BuildRequires:  python-sphinx-theme-alabaster
+BuildRequires:  python2-sphinx-theme-alabaster
 BuildRequires:  python-six
 BuildRequires:  python-twisted
 Requires:       python-twisted
@@ -117,6 +117,9 @@ PYTHONPATH=$PYTHONPATH:. coverage2 run -p --source=txaio /usr/bin/py.test-%{pyth
 
 
 %changelog
+* Tue Aug 4 2015 Julien Enselme <jujens@jujens.eu> - 1.0.0-4
+- Correct sphinx theme name in BuildRequires
+
 * Thu Jul 30 2015 Julien Enselme <jujens@jujens.eu> - 1.0.0-3
 - Add provides for python2-txaio
 - Remove usage of python2 and python3 dirs
