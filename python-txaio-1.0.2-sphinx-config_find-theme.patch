@@ -1,0 +1,19 @@
+--- doc/conf.py.orig	2015-08-08 15:43:06.296973317 +0200
++++ doc/conf.py	2015-08-08 15:43:35.857320995 +0200
+@@ -16,6 +16,7 @@
+ import sys
+ import os
+ import shlex
++import alabaster
+ 
+ # If extensions (or modules to document with autodoc) are in another directory,
+ # add these directories to sys.path here. If the directory is relative to the
+@@ -127,7 +128,7 @@
+ #html_theme_options = {}
+ 
+ # Add any paths that contain custom themes here, relative to this directory.
+-#html_theme_path = []
++html_theme_path = [alabaster.get_path()]
+ 
+ # The name for this set of Sphinx documents.  If None, it defaults to
+ # "<project> v<release> documentation".

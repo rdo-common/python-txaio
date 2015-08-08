@@ -1,17 +1,14 @@
 %global pypi_name txaio
 
 Name:           python-%{pypi_name}
-Version:        1.0.0
-Release:        4%{?dist}
+Version:        1.0.2
+Release:        1%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
-Source0:        https://pypi.python.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.zip
-# Release on pypi is missing a util file which is needed to launch tests
-# See: https://github.com/tavendo/txaio/issues/3
-Source1:        https://raw.githubusercontent.com/tavendo/txaio/v1.0.0/test/util.py
-Patch0:         python-txaio-1.0.0-sphinx-config_find-theme.patch
+Source0:        https://pypi.python.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Patch0:         python-txaio-%{version}-sphinx-config_find-theme.patch
 
 BuildArch: noarch
 
@@ -67,13 +64,14 @@ asyncio. Documentation in html format.
 # Remove upstream's egg-info
 rm -rf %{pypi_name}.egg-info
 
-cp %{SOURCE1} test/
+# README is just a symlink to index.rst. Using this file as README
+rm README.rst
+cp -a doc/index.rst README.rst
 
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
-
-CFLAGS="$RPM_OPT_FLAGS" %{__python2} setup.py build
+%py2_build
+%py3_build
 
 # Build documentation
 cd doc && make html
@@ -87,9 +85,8 @@ ln -s /usr/share/javascript/jquery/latest/jquery.min.js _build/html/_static/jque
 
 
 %install
-%{__python3} setup.py install --skip-build --root %{buildroot}
-
-%{__python2} setup.py install --skip-build --root %{buildroot}
+%py2_install
+%py3_install
 
 
 %check
@@ -117,6 +114,10 @@ PYTHONPATH=$PYTHONPATH:. coverage2 run -p --source=txaio /usr/bin/py.test-%{pyth
 
 
 %changelog
+* Sat Aug 8 2015 Julien Enselme <jujens@jujens.eu> - 1.0.2-1
+- Update to 1.0.2
+- Use %%py2_build, %%py3_build, %%py2_install and %%py2_install
+
 * Tue Aug 4 2015 Julien Enselme <jujens@jujens.eu> - 1.0.0-4
 - Correct sphinx theme name in BuildRequires
 
