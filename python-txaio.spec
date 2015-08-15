@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.0.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
@@ -10,8 +10,7 @@ URL:            https://pypi.python.org/pypi/%{pypi_name}
 Source0:        https://pypi.python.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 Patch0:         python-txaio-%{version}-sphinx-config_find-theme.patch
 
-BuildArch: noarch
-
+BuildArch:      noarch
 BuildRequires:  python2-devel
 BuildRequires:  pytest
 BuildRequires:  python-pytest-cov
@@ -21,18 +20,27 @@ BuildRequires:  python-sphinx
 BuildRequires:  python2-sphinx-theme-alabaster
 BuildRequires:  python-six
 BuildRequires:  python-twisted
-Requires:       python-twisted
-Requires:       python-six
-Provides:       python2-%{pypi_name} = %{version}-%{release}
 
 %description
 Helper library for writing code that runs unmodified on both Twisted and
 asyncio.
 
 
+%package -n     python2-%{pypi_name}
+Summary:        Compatibility API between asyncio/Twisted/Trollius
+BuildArch:      noarch
+Requires:       python-twisted
+Requires:       python-six
+%{?python_provide:%python_provide python2-%{pypi_name}}
+
+%description -n python2-%{pypi_name}
+Helper library for writing code that runs unmodified on both Twisted and
+asyncio.
+
+
 %package -n     python3-%{pypi_name}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
-BuildArch: noarch
+BuildArch:      noarch
 BuildRequires:  python3-devel
 BuildRequires:  python3-pytest
 BuildRequires:  python3-pytest-cov
@@ -42,6 +50,7 @@ BuildRequires:  python3-sphinx
 BuildRequires:  python3-sphinx-theme-alabaster
 BuildRequires:  python3-six
 Requires:       python3-six
+%{?python_provide:%python_provide python3-%{pypi_name}}
 
 %description -n python3-%{pypi_name}
 Helper library for writing code that runs unmodified on both Twisted and
@@ -95,7 +104,7 @@ PYTHONPATH=$PYTHONPATH:. coverage3 run -p --source=txaio /usr/bin/py.test-%{pyth
 PYTHONPATH=$PYTHONPATH:. coverage2 run -p --source=txaio /usr/bin/py.test-%{python2_version} -s
 
 
-%files
+%files -n python2-%{pypi_name}
 %license LICENSE
 %doc README.rst
 %{python2_sitelib}/%{pypi_name}-%{version}-py%{python2_version}.egg-info/
@@ -114,6 +123,9 @@ PYTHONPATH=$PYTHONPATH:. coverage2 run -p --source=txaio /usr/bin/py.test-%{pyth
 
 
 %changelog
+* Sat Aug 15 2015 Julien Enselme <jujens@jujens.eu> - 1.0.3-2
+- Move python2 package in its own subpackage
+
 * Sat Aug 15 2015 Julien Enselme <jujens@jujens.eu> - 1.0.3-1
 - Update to 1.0.3
 
