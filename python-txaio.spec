@@ -1,7 +1,7 @@
 %global pypi_name txaio
 
 Name:           python-%{pypi_name}
-Version:        1.0.2
+Version:        1.0.3
 Release:        1%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
@@ -114,6 +114,9 @@ PYTHONPATH=$PYTHONPATH:. coverage2 run -p --source=txaio /usr/bin/py.test-%{pyth
 
 
 %changelog
+* Sat Aug 15 2015 Julien Enselme <jujens@jujens.eu> - 1.0.3-1
+- Update to 1.0.3
+
 * Sat Aug 8 2015 Julien Enselme <jujens@jujens.eu> - 1.0.2-1
 - Update to 1.0.2
 - Use %%py2_build, %%py3_build, %%py2_install and %%py2_install
