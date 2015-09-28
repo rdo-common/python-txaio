@@ -1,8 +1,8 @@
 %global pypi_name txaio
 
 Name:           python-%{pypi_name}
-Version:        1.0.3
-Release:        2%{?dist}
+Version:        2.0.2
+Release:        1%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
@@ -123,6 +123,9 @@ PYTHONPATH=$PYTHONPATH:. coverage2 run -p --source=txaio /usr/bin/py.test-%{pyth
 
 
 %changelog
+* Mon Sep 28 2015 Julien Enselme <jujens@jujens.eu> - 2.0.2-1
+- Update to 2.0.2
+
 * Sat Aug 15 2015 Julien Enselme <jujens@jujens.eu> - 1.0.3-2
 - Move python2 package in its own subpackage
 
