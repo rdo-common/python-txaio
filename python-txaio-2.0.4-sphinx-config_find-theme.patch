@@ -1,14 +1,14 @@
---- doc/conf.py.orig	2015-08-08 15:43:06.296973317 +0200
-+++ doc/conf.py	2015-08-08 15:43:35.857320995 +0200
-@@ -16,6 +16,7 @@
- import sys
+--- docs/conf.py	2015-09-27 08:54:46.000000000 +0200
++++ docs/conf.py	2015-10-17 18:43:07.013014490 +0200
+@@ -17,6 +17,7 @@
  import os
  import shlex
+ import time
 +import alabaster
  
- # If extensions (or modules to document with autodoc) are in another directory,
- # add these directories to sys.path here. If the directory is relative to the
-@@ -127,7 +128,7 @@
+ try:
+     import sphinx_rtd_theme
+@@ -174,7 +175,7 @@
  #html_theme_options = {}
  
  # Add any paths that contain custom themes here, relative to this directory.

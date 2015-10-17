@@ -1,7 +1,7 @@
 %global pypi_name txaio
 
 Name:           python-%{pypi_name}
-Version:        2.0.2
+Version:        2.0.4
 Release:        1%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
@@ -9,6 +9,7 @@ License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
 Source0:        https://pypi.python.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 Patch0:         python-txaio-%{version}-sphinx-config_find-theme.patch
+Patch1:         python-txaio-%{version}-tests.patch
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
@@ -69,13 +70,14 @@ asyncio. Documentation in html format.
 %prep
 %setup -qn %{pypi_name}-%{version}
 %patch0
+%patch1
 
 # Remove upstream's egg-info
 rm -rf %{pypi_name}.egg-info
 
 # README is just a symlink to index.rst. Using this file as README
 rm README.rst
-cp -a doc/index.rst README.rst
+cp -a docs/index.rst README.rst
 
 
 %build
@@ -83,7 +85,7 @@ cp -a doc/index.rst README.rst
 %py3_build
 
 # Build documentation
-cd doc && make html
+cd docs && make html
 
 # Remove buildinfo
 rm -rf _build/html/.buildinfo
@@ -119,10 +121,13 @@ PYTHONPATH=$PYTHONPATH:. coverage2 run -p --source=txaio /usr/bin/py.test-%{pyth
 
 %files doc
 %license LICENSE
-%doc doc/_build/html
+%doc docs/_build/html
 
 
 %changelog
+* Sat Oct 17 2015 Julien Enselme <jujens@jujens.eu> - 2.0.4-1
+- Update 2.0.4
+
 * Mon Sep 28 2015 Julien Enselme <jujens@jujens.eu> - 2.0.2-1
 - Update to 2.0.2
 

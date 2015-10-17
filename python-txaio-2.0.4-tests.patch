@@ -1,0 +1,10 @@
+--- test/test_packaging.py	2015-10-17 19:09:01.342981497 +0200
++++ test/test_packaging.py	2015-10-17 19:09:37.874402253 +0200
+@@ -34,6 +34,7 @@
+ import txaio
+
+
++@pytest.mark.skipif(True, reason='Not needed for RPM build')
+ def test_sdist():
+     if not hasattr(subprocess, 'check_output'):
+         pytest.skip()
