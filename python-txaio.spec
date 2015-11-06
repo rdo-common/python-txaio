@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        2.0.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
@@ -125,6 +125,9 @@ PYTHONPATH=$PYTHONPATH:. coverage2 run -p --source=txaio /usr/bin/py.test-%{pyth
 
 
 %changelog
+* Fri Nov 6 2015 Julien Enselme <jujens@jujens.eu> - 2.0.4-2
+- Rebuilt for python 3.5
+
 * Sat Oct 17 2015 Julien Enselme <jujens@jujens.eu> - 2.0.4-1
 - Update 2.0.4
 
