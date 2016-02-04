@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        2.0.4
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
@@ -125,6 +125,9 @@ PYTHONPATH=$PYTHONPATH:. coverage2 run -p --source=txaio /usr/bin/py.test-%{pyth
 
 
 %changelog
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2.0.4-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Fri Nov 6 2015 Julien Enselme <jujens@jujens.eu> - 2.0.4-2
 - Rebuilt for python 3.5
 
