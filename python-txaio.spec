@@ -1,26 +1,31 @@
 %global pypi_name txaio
 
 Name:           python-%{pypi_name}
-Version:        2.0.4
-Release:        3%{?dist}
+Version:        2.2.1
+Release:        1%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
 Source0:        https://pypi.python.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
-Patch0:         python-txaio-%{version}-sphinx-config_find-theme.patch
-Patch1:         python-txaio-%{version}-tests.patch
+Patch0:          python-txaio-%{version}-tests.patch
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
-BuildRequires:  pytest
-BuildRequires:  python-pytest-cov
-BuildRequires:  python-mock
-BuildRequires:  python-pep8
-BuildRequires:  python-sphinx
-BuildRequires:  python2-sphinx-theme-alabaster
+BuildRequires:  pytest >= 2.6.4
+BuildRequires:  python-pytest-cov >= 1.8.1
+BuildRequires:  python-mock >= 1.3.0
+BuildRequires:  python-pep8 >= 1.6.2
+BuildRequires:  python-sphinx >= 1.2.3
+BuildRequires:  python-sphinx_rtd_theme
 BuildRequires:  python-six
 BuildRequires:  python-twisted
+BuildRequires:  python-zope-interface
+BuildRequires:  python-trollius >= 2.0
+BuildRequires:  python-futures >= 3.0.3
+BuildRequires:  python-enchant >= 1.6.6
+BuildRequires:  python-tox >= 2.1.1
+
 
 %description
 Helper library for writing code that runs unmodified on both Twisted and
@@ -31,6 +36,7 @@ asyncio.
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 BuildArch:      noarch
 Requires:       python-twisted
+Requires:       python-zope-interface
 Requires:       python-six
 %{?python_provide:%python_provide python2-%{pypi_name}}
 
@@ -48,8 +54,10 @@ BuildRequires:  python3-pytest-cov
 BuildRequires:  python3-mock
 BuildRequires:  python3-pep8
 BuildRequires:  python3-sphinx
-BuildRequires:  python3-sphinx-theme-alabaster
+BuildRequires:  python3-sphinx_rtd_theme
 BuildRequires:  python3-six
+BuildRequires:  python3-tox >= 2.1.1
+BuildRequires:  python3-enchant >= 1.6.6
 Requires:       python3-six
 %{?python_provide:%python_provide python3-%{pypi_name}}
 
@@ -70,14 +78,13 @@ asyncio. Documentation in html format.
 %prep
 %setup -qn %{pypi_name}-%{version}
 %patch0
-%patch1
 
 # Remove upstream's egg-info
 rm -rf %{pypi_name}.egg-info
 
 # README is just a symlink to index.rst. Using this file as README
-rm README.rst
-cp -a docs/index.rst README.rst
+rm docs/index.rst
+cp -a README.rst docs/index.rst
 
 
 %build
@@ -125,6 +132,9 @@ PYTHONPATH=$PYTHONPATH:. coverage2 run -p --source=txaio /usr/bin/py.test-%{pyth
 
 
 %changelog
+* Sat Feb 27 2016 Julien Enselme <jujens@jujens.eu> - 2.2.1-1
+- Update to 2.2.1
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2.0.4-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
