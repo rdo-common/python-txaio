@@ -1,14 +1,14 @@
 %global pypi_name txaio
 
 Name:           python-%{pypi_name}
-Version:        2.2.1
+Version:        2.5.1
 Release:        1%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
 Source0:        https://pypi.python.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
-Patch0:          python-txaio-%{version}-tests.patch
+Patch0:         python-txaio-%{version}-tests.patch
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
@@ -16,11 +16,11 @@ BuildRequires:  pytest >= 2.6.4
 BuildRequires:  python-pytest-cov >= 1.8.1
 BuildRequires:  python-mock >= 1.3.0
 BuildRequires:  python-pep8 >= 1.6.2
-BuildRequires:  python-sphinx >= 1.2.3
+BuildRequires:  python2-sphinx >= 1.2.3
 BuildRequires:  python-sphinx_rtd_theme
 BuildRequires:  python-six
-BuildRequires:  python-twisted
-BuildRequires:  python-zope-interface
+BuildRequires:  python-twisted >= 12.1.0
+BuildRequires:  python-zope-interface >= 3.6
 BuildRequires:  python-trollius >= 2.0
 BuildRequires:  python-futures >= 3.0.3
 BuildRequires:  python-enchant >= 1.6.6
@@ -35,8 +35,10 @@ asyncio.
 %package -n     python2-%{pypi_name}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 BuildArch:      noarch
-Requires:       python-twisted
-Requires:       python-zope-interface
+Requires:       python-twisted >= 12.1.0
+Requires:       python-zope-interface >= 3.6
+Requires:       python-trollius >= 2.0
+Requires:       python-futures >= 3.0.3
 Requires:       python-six
 %{?python_provide:%python_provide python2-%{pypi_name}}
 
@@ -132,6 +134,9 @@ PYTHONPATH=$PYTHONPATH:. coverage2 run -p --source=txaio /usr/bin/py.test-%{pyth
 
 
 %changelog
+* Mon May 16 2016 Julien Enselme <jujens@jujens.eu> - 2.5.1-1
+- Update to 2.5.1
+
 * Sat Feb 27 2016 Julien Enselme <jujens@jujens.eu> - 2.2.1-1
 - Update to 2.2.1
 
