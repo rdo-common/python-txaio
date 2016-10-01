@@ -1,0 +1,41 @@
+diff --git i/README.rst w/README.rst
+index f9084df..52e9769 100644
+--- i/README.rst
++++ w/README.rst
+@@ -1,10 +1,6 @@
+ txaio
+ =====
+ 
+-| |Version| |Downloads| |Build Status| |Coverage| |Docs|
+-
+---------------
+-
+ **txaio** is a helper library for writing code that runs unmodified on
+ both `Twisted <https://twistedmatrix.com/>`_ and `asyncio <https://docs.python.org/3/library/asyncio.html>`_ / `Trollius <http://trollius.readthedocs.org/en/latest/index.html>`_.
+ 
+@@ -58,25 +54,3 @@ Code like the following can then run on *either* system:
+     # ...
+     txaio.resolve(f0, "value")
+     txaio.reject(f1, RuntimeError("it failed"))
+-
+-
+-.. |Version| image:: https://img.shields.io/pypi/v/txaio.svg
+-   :target: https://pypi.python.org/pypi/txaio
+-
+-.. |Downloads| image:: https://img.shields.io/pypi/dm/txaio.svg
+-   :target: https://pypi.python.org/pypi/txaio
+-
+-.. |GitHub Stars| image:: https://img.shields.io/github/stars/crossbario/txaio.svg?style=social&label=Star
+-   :target: https://github.com/crossbario/txaio
+-
+-.. |Master Branch| image:: https://img.shields.io/badge/branch-master-orange.svg
+-   :target: https://travis-ci.org/crossbario/txaio.svg?branch=master
+-
+-.. |Build Status| image:: https://travis-ci.org/crossbario/txaio.svg?branch=master
+-   :target: https://travis-ci.org/crossbario/txaio
+-
+-.. |Coverage| image:: https://img.shields.io/codecov/c/github/crossbario/txaio/master.svg
+-   :target: https://codecov.io/github/crossbario/txaio
+-
+-.. |Docs| image:: https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat
+-   :target: http://txaio.readthedocs.org/en/latest/

@@ -1,0 +1,21 @@
+From e48a9096c90686245d2e00f7957fd2058eb8101d Mon Sep 17 00:00:00 2001
+From: Julien Enselme <julien.enselme@centrale-marseille.fr>
+Date: Sat, 1 Oct 2016 20:41:59 +0200
+Subject: [PATCH] Fix tests to run on pytest 3 and pytest 2
+
+---
+ test/conftest.py | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/test/conftest.py b/test/conftest.py
+index a79a27f..4a225c8 100644
+--- a/test/conftest.py
++++ b/test/conftest.py
+@@ -1,7 +1,5 @@
+ import pytest
+ 
+-pytest_plugins = ""
+-
+ # here's a little voodoo -- any generic tests depend on this 'framework'
+ # fixture, which (sneakily using internal-only APIs) ensures that each
+ # tests runs twice: once enabled for Twisted and once enabled for

@@ -9,6 +9,10 @@ License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
 Source0:        https://pypi.python.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 Patch0:         python-txaio-%{version}-tests.patch
+# Reported upstream. See: https://github.com/crossbario/txaio/pull/78
+Patch1:         fix-pytest3.patch
+# Error reported upstream. See: https://github.com/sphinx-doc/sphinx/issues/2999
+Patch2:         fix-doc-sphinx-1.4.8.patch
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
@@ -80,6 +84,8 @@ asyncio. Documentation in html format.
 %prep
 %setup -qn %{pypi_name}-%{version}
 %patch0
+%patch1 -p1
+%patch2 -p1
 
 # Remove upstream's egg-info
 rm -rf %{pypi_name}.egg-info
@@ -110,9 +116,8 @@ ln -s /usr/share/javascript/jquery/latest/jquery.min.js _build/html/_static/jque
 
 
 %check
-PYTHONPATH=$PYTHONPATH:. coverage3 run -p --source=txaio /usr/bin/py.test-%{python3_version} -s
-
-PYTHONPATH=$PYTHONPATH:. coverage2 run -p --source=txaio /usr/bin/py.test-%{python2_version} -s
+PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage3 run -p --source=txaio /usr/bin/py.test-%{python3_version} -s
+PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/bin/py.test-%{python2_version} -s
 
 
 %files -n python2-%{pypi_name}
@@ -134,6 +139,10 @@ PYTHONPATH=$PYTHONPATH:. coverage2 run -p --source=txaio /usr/bin/py.test-%{pyth
 
 
 %changelog
+* Sat Oct 01 2016 Julien Enselme <jujens@jujens.eu> - 2.5.1-2
+- Fix tests for pytest3
+- Correct build of documentation with sphinx 1.4.8
+
 * Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.5.1-2
 - https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
 
