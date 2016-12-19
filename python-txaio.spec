@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        2.5.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
@@ -139,6 +139,9 @@ PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/b
 
 
 %changelog
+* Mon Dec 19 2016 Miro Hrončok <mhroncok@redhat.com> - 2.5.1-3
+- Rebuild for Python 3.6
+
 * Sat Oct 01 2016 Julien Enselme <jujens@jujens.eu> - 2.5.1-2
 - Fix tests for pytest3
 - Correct build of documentation with sphinx 1.4.8
