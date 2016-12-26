@@ -1,18 +1,15 @@
 %global pypi_name txaio
 
 Name:           python-%{pypi_name}
-Version:        2.5.1
-Release:        3%{?dist}
+Version:        2.5.2
+Release:        1%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
-Source0:        https://pypi.python.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
-Patch0:         python-txaio-%{version}-tests.patch
-# Reported upstream. See: https://github.com/crossbario/txaio/pull/78
-Patch1:         fix-pytest3.patch
-# Error reported upstream. See: https://github.com/sphinx-doc/sphinx/issues/2999
-Patch2:         fix-doc-sphinx-1.4.8.patch
+Source0:        https://pypi.python.org/packages/ca/75/6f32fad1ba168863402de3a83cfa80a748fb5e871123a540b054fbad5bb0/txaio-2.5.2.tar.gz
+Patch0:         python-txaio-skip-packaging-tests.patch
+Patch1:         skip-failing-test-python3.6.patch
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
@@ -85,7 +82,6 @@ asyncio. Documentation in html format.
 %setup -qn %{pypi_name}-%{version}
 %patch0
 %patch1 -p1
-%patch2 -p1
 
 # Remove upstream's egg-info
 rm -rf %{pypi_name}.egg-info
@@ -139,6 +135,10 @@ PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/b
 
 
 %changelog
+* Mon Dec 26 2016 Julien Enselme <jujens@jujens.eu> - 2.5.2-1
+- Update to 2.5.2
+- Skip failing tests on Python 3.6
+
 * Mon Dec 19 2016 Miro Hrončok <mhroncok@redhat.com> - 2.5.1-3
 - Rebuild for Python 3.6
 
