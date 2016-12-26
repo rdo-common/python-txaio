@@ -9,6 +9,7 @@ License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
 Source0:        https://pypi.python.org/packages/ca/75/6f32fad1ba168863402de3a83cfa80a748fb5e871123a540b054fbad5bb0/txaio-2.5.2.tar.gz
 Patch0:         python-txaio-skip-packaging-tests.patch
+# See: https://github.com/crossbario/txaio/issues/83
 Patch1:         skip-failing-test-python3.6.patch
 
 BuildArch:      noarch
