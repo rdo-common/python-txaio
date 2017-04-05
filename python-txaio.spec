@@ -1,13 +1,13 @@
 %global pypi_name txaio
 
 Name:           python-%{pypi_name}
-Version:        2.5.2
-Release:        2%{?dist}
+Version:        2.6.2
+Release:        1%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
-Source0:        https://pypi.python.org/packages/ca/75/6f32fad1ba168863402de3a83cfa80a748fb5e871123a540b054fbad5bb0/txaio-2.5.2.tar.gz
+Source0:        https://pypi.python.org/packages/0b/00/7cf81e89bbca555051392c5f5dcfc9bf2ac934846d788257d7210fa8535b/txaio-2.6.2.tar.gz
 Patch0:         python-txaio-skip-packaging-tests.patch
 # See: https://github.com/crossbario/txaio/issues/83
 Patch1:         skip-failing-test-python3.6.patch
@@ -110,6 +110,8 @@ ln -s /usr/share/javascript/jquery/latest/jquery.min.js _build/html/_static/jque
 %install
 %py2_install
 %py3_install
+# Install put the LICENSE file in /usr. Remove it.
+rm %{buildroot}/usr/LICENSE
 
 
 %check
@@ -136,6 +138,9 @@ PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/b
 
 
 %changelog
+* Wed Apr 05 2017 Julien Enselme <jujens@jujens.eu> - 2.6.2-1
+- Update to 2.6.2
+
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 2.5.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
