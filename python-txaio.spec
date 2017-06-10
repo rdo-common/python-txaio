@@ -1,16 +1,14 @@
 %global pypi_name txaio
 
 Name:           python-%{pypi_name}
-Version:        2.7.1
+Version:        2.8.0
 Release:        1%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
-Source0:        https://pypi.python.org/packages/a5/97/3fe0c5674e1eb8eb850a885df8df193ba83ba0eda6c5eb6c33ac49730bb9/txaio-2.7.1.tar.gz
+Source0:        https://pypi.python.org/packages/03/86/2cb7ae81209cc3fc64f68a31d70c20ab4771b520d7e13a5219b1f5e16ee1/txaio-2.8.0.tar.gz
 Patch0:         python-txaio-skip-packaging-tests.patch
-# See: https://github.com/crossbario/txaio/issues/83
-Patch1:         skip-failing-test-python3.6.patch
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
@@ -82,7 +80,6 @@ asyncio. Documentation in html format.
 %prep
 %setup -qn %{pypi_name}-%{version}
 %patch0
-%patch1 -p1
 
 # Remove upstream's egg-info
 rm -rf %{pypi_name}.egg-info
@@ -138,6 +135,9 @@ PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/b
 
 
 %changelog
+* Sat Jun 10 2017 Julien Enselme <jujens@jujens.eu> - 2.8.0-1
+- Update to 2.8.0
+
 * Sun May 07 2017 Julien Enselme <jujens@jujens.eu> - 2.7.1-1
 - Update to 2.7.1
 
