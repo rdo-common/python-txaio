@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        2.8.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
@@ -12,19 +12,19 @@ Patch0:         python-txaio-skip-packaging-tests.patch
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
-BuildRequires:  pytest >= 2.6.4
-BuildRequires:  python-pytest-cov >= 1.8.1
-BuildRequires:  python-mock >= 1.3.0
-BuildRequires:  python-pep8 >= 1.6.2
+BuildRequires:  python2-pytest >= 2.6.4
+BuildRequires:  python2-pytest-cov >= 1.8.1
+BuildRequires:  python2-mock >= 1.3.0
+BuildRequires:  python2-pep8 >= 1.6.2
 BuildRequires:  python2-sphinx >= 1.2.3
-BuildRequires:  python-sphinx_rtd_theme
-BuildRequires:  python-six
-BuildRequires:  python-twisted >= 12.1.0
-BuildRequires:  python-zope-interface >= 3.6
-BuildRequires:  python-trollius >= 2.0
-BuildRequires:  python-futures >= 3.0.3
-BuildRequires:  python-enchant >= 1.6.6
-BuildRequires:  python-tox >= 2.1.1
+BuildRequires:  python2-sphinx_rtd_theme
+BuildRequires:  python2-six
+BuildRequires:  python2-twisted >= 12.1.0
+BuildRequires:  python2-zope-interface >= 3.6
+BuildRequires:  python2-trollius >= 2.0
+BuildRequires:  python2-futures >= 3.0.3
+BuildRequires:  python2-enchant >= 1.6.6
+BuildRequires:  python2-tox >= 2.1.1
 
 
 %description
@@ -35,11 +35,11 @@ asyncio.
 %package -n     python2-%{pypi_name}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 BuildArch:      noarch
-Requires:       python-twisted >= 12.1.0
-Requires:       python-zope-interface >= 3.6
-Requires:       python-trollius >= 2.0
-Requires:       python-futures >= 3.0.3
-Requires:       python-six
+Requires:       python2-twisted >= 12.1.0
+Requires:       python2-zope-interface >= 3.6
+Requires:       python2-trollius >= 2.0
+Requires:       python2-futures >= 3.0.3
+Requires:       python2-six
 %{?python_provide:%python_provide python2-%{pypi_name}}
 
 %description -n python2-%{pypi_name}
@@ -133,6 +133,10 @@ PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/b
 
 
 %changelog
+* Wed Jan 31 2018 Iryna Shcherbina <ishcherb@redhat.com> - 2.8.2-2
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
 * Wed Sep 06 2017 Julien Enselme <jujens@jujens.eu> - 2.8.2-1
 - Update to 2.8.2
 
