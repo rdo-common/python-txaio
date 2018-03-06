@@ -1,13 +1,13 @@
 %global pypi_name txaio
 
 Name:           python-%{pypi_name}
-Version:        2.8.2
-Release:        3%{?dist}
+Version:        2.9.0
+Release:        1%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
-Source0:        https://files.pythonhosted.org/packages/d6/95/d0c67304515f352342bc8fd14e5a3e7ca924134608acb730916073b18464/txaio-2.8.2.tar.gz
+Source0:        https://files.pythonhosted.org/packages/99/e3/fcac17b32158112591c1441882ee65dec6c77b33e5353f568004970f98e1/txaio-2.9.0.tar.gz
 Patch0:         python-txaio-skip-packaging-tests.patch
 
 BuildArch:      noarch
@@ -133,6 +133,9 @@ PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/b
 
 
 %changelog
+* Tue Mar 06 2018 Julien Enselme <jujens@jujens.eu> - 2.9.0-1
+- Update to 2.9.0
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.8.2-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
