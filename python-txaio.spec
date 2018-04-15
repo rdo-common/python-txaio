@@ -1,13 +1,13 @@
 %global pypi_name txaio
 
 Name:           python-%{pypi_name}
-Version:        2.9.0
+Version:        2.10.0
 Release:        1%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
-Source0:        https://files.pythonhosted.org/packages/99/e3/fcac17b32158112591c1441882ee65dec6c77b33e5353f568004970f98e1/txaio-2.9.0.tar.gz
+Source0:        https://files.pythonhosted.org/packages/b8/87/efcae4040c2a0af9c871116a6dbf02ee582b396e6de3797fb30cdcc4a7e4/txaio-2.10.0.tar.gz
 Patch0:         python-txaio-skip-packaging-tests.patch
 
 BuildArch:      noarch
@@ -133,6 +133,9 @@ PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/b
 
 
 %changelog
+* Sun Apr 15 2018 Julien Enselme <jujens@jujens.eu> - 2.10.0-1
+- Update to 2.10.0
+
 * Tue Mar 06 2018 Julien Enselme <jujens@jujens.eu> - 2.9.0-1
 - Update to 2.9.0
 
