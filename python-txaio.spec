@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        2.10.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
@@ -24,7 +24,6 @@ BuildRequires:  python2-zope-interface >= 3.6
 BuildRequires:  python2-trollius >= 2.0
 BuildRequires:  python2-futures >= 3.0.3
 BuildRequires:  python2-enchant >= 1.6.6
-BuildRequires:  python2-tox >= 2.1.1
 
 
 %description
@@ -58,7 +57,6 @@ BuildRequires:  python3-pep8
 BuildRequires:  python3-sphinx
 BuildRequires:  python3-sphinx_rtd_theme
 BuildRequires:  python3-six
-BuildRequires:  python3-tox >= 2.1.1
 BuildRequires:  python3-enchant >= 1.6.6
 Requires:       python3-six
 %{?python_provide:%python_provide python3-%{pypi_name}}
@@ -133,6 +131,9 @@ PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/b
 
 
 %changelog
+* Tue May 08 2018 Miro Hrončok <mhroncok@redhat.com> - 2.10.0-2
+- Remove unused build dependency on tox
+
 * Sun Apr 15 2018 Julien Enselme <jujens@jujens.eu> - 2.10.0-1
 - Update to 2.10.0
 
