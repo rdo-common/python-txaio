@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        2.10.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
@@ -131,6 +131,9 @@ PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/b
 
 
 %changelog
+* Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 2.10.0-3
+- Rebuilt for Python 3.7
+
 * Tue May 08 2018 Miro Hrončok <mhroncok@redhat.com> - 2.10.0-2
 - Remove unused build dependency on tox
 
