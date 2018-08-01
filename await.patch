@@ -1,0 +1,44 @@
+diff -ru txaio-2.10.0/test/test_gather.py txaio-2.10.0_patched/test/test_gather.py
+--- txaio-2.10.0/test/test_gather.py	2018-03-02 08:04:45.000000000 +0100
++++ txaio-2.10.0_patched/test/test_gather.py	2018-08-01 13:03:40.237465405 +0200
+@@ -26,7 +26,7 @@
+ 
+ import txaio
+ 
+-from util import await
++from util import await_completion
+ 
+ 
+ def test_gather_two(framework):
+@@ -61,7 +61,7 @@
+     txaio.add_callbacks(f2, done, error)
+ 
+     for f in [f0, f1, f2]:
+-        await(f)
++        await_completion(f)
+ 
+     assert len(results) == 1
+     assert len(errors) == 0
+@@ -99,7 +99,7 @@
+     # out of "run_until_complete()" as well; fix util.py?
+     for f in [f0, f1, f2]:
+         try:
+-            await(f)
++            await_completion(f)
+         except Exception:
+             pass
+ 
+Only in txaio-2.10.0_patched/test: .test_gather.py.swp
+diff -ru txaio-2.10.0/test/util.py txaio-2.10.0_patched/test/util.py
+--- txaio-2.10.0/test/util.py	2017-04-15 16:17:17.000000000 +0200
++++ txaio-2.10.0_patched/test/util.py	2018-08-01 13:02:30.099152902 +0200
+@@ -57,7 +57,7 @@
+         asyncio.gather(*asyncio.Task.all_tasks())
+ 
+ 
+-def await(future):
++def await_completion(future):
+     '''
+     Essentially just a way to call "run_until_complete" that becomes a
+     no-op if we're using Twisted.
+Only in txaio-2.10.0_patched/test: .util.py.swp

@@ -1,0 +1,16 @@
+Only in txaio-2.10.0_patched/test: .test_gather.py.swp
+diff -ru txaio-2.10.0/test/util.py txaio-2.10.0_patched/test/util.py
+--- txaio-2.10.0/test/util.py	2018-08-01 13:29:41.193234192 +0200
++++ txaio-2.10.0_patched/test/util.py	2018-08-01 13:27:57.028789000 +0200
+@@ -38,7 +38,9 @@
+ 
+     try:
+         import asyncio
+-        from asyncio.test_utils import run_once as _run_once
++        def _run_once(loop):
++            loop.call_soon(loop.stop)
++            loop.run_forever()
+         return _run_once(txaio.config.loop or asyncio.get_event_loop())
+ 
+     except ImportError:
+Only in txaio-2.10.0_patched/test: .util.py.swp
