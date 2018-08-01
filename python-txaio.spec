@@ -1,15 +1,14 @@
 %global pypi_name txaio
 
 Name:           python-%{pypi_name}
-Version:        2.10.0
-Release:        5%{?dist}
+Version:        18.7.1
+Release:        1%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
-Source0:        https://files.pythonhosted.org/packages/b8/87/efcae4040c2a0af9c871116a6dbf02ee582b396e6de3797fb30cdcc4a7e4/txaio-2.10.0.tar.gz
+Source0:        https://files.pythonhosted.org/packages/0f/eb/87f67de6876f293122801a93baa21ed1cc6feb44d80ff17c989828cb8023/txaio-18.7.1.tar.gz
 Patch0:         python-txaio-skip-packaging-tests.patch
-Patch1:         await.patch
 # The test_utils module can no longer be imported from asyncio
 # and is undocumented intentionaly because it's private.
 # This is a hack that calls stop on the loop soon after calling run_forever().
@@ -83,7 +82,6 @@ asyncio. Documentation in html format.
 %prep
 %setup -qn %{pypi_name}-%{version}
 %patch0
-%patch1 -p1
 %patch2 -p1
 
 # Remove upstream's egg-info
@@ -138,6 +136,9 @@ PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/b
 
 
 %changelog
+* Wed Aug 01 2018 Julien Enselme <jujens@jujens.eu> - 18.7.1-1
+- Update to 18.7.1
+
 * Wed Aug 01 2018 Marcel Plch <mplch@redhat.com> - 2.10.0-5
 - Patch for Python 3.7
 
