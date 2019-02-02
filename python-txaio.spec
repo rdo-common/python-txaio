@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        18.7.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
@@ -136,6 +136,9 @@ PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/b
 
 
 %changelog
+* Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 18.7.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Wed Aug 01 2018 Julien Enselme <jujens@jujens.eu> - 18.7.1-1
 - Update to 18.7.1
 
