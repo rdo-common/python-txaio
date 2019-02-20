@@ -1,16 +1,32 @@
-Only in txaio-2.10.0_patched/test: .test_gather.py.swp
-diff -ru txaio-2.10.0/test/util.py txaio-2.10.0_patched/test/util.py
---- txaio-2.10.0/test/util.py	2018-08-01 13:29:41.193234192 +0200
-+++ txaio-2.10.0_patched/test/util.py	2018-08-01 13:27:57.028789000 +0200
-@@ -38,7 +38,9 @@
- 
-     try:
+From ff27e91cd0e685add681850039ffc3cff35a06df Mon Sep 17 00:00:00 2001
+From: yatin <ykarel@redhat.com>
+Date: Wed, 20 Feb 2019 12:54:41 +0530
+Subject: [PATCH] Patch _run_once
+
+---
+ test/util.py | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/test/util.py b/test/util.py
+index 9f56778..8084b9c 100644
+--- a/test/util.py
++++ b/test/util.py
+@@ -42,9 +42,13 @@ def run_once():
          import asyncio
--        from asyncio.test_utils import run_once as _run_once
-+        def _run_once(loop):
-+            loop.call_soon(loop.stop)
-+            loop.run_forever()
+         if sys.version_info >= (3, 7):
+             # https://github.com/crossbario/txaio/issues/139
+-            from _asyncio_test_utils import run_once as _run_once
++            def _run_once(loop):
++                loop.call_soon(loop.stop)
++                loop.run_forever()
+         else:
+-            from asyncio.test_utils import run_once as _run_once
++            def _run_once(loop):
++                loop.call_soon(loop.stop)
++                loop.run_forever()
          return _run_once(txaio.config.loop or asyncio.get_event_loop())
  
      except ImportError:
-Only in txaio-2.10.0_patched/test: .util.py.swp
+-- 
+2.17.1
+

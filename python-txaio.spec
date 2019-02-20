@@ -1,13 +1,13 @@
 %global pypi_name txaio
 
 Name:           python-%{pypi_name}
-Version:        18.7.1
-Release:        2%{?dist}
+Version:        18.8.1
+Release:        1%{?dist}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
-Source0:        https://files.pythonhosted.org/packages/0f/eb/87f67de6876f293122801a93baa21ed1cc6feb44d80ff17c989828cb8023/txaio-18.7.1.tar.gz
+Source0:        https://files.pythonhosted.org/packages/source/t/txaio/txaio-%{version}.tar.gz
 Patch0:         python-txaio-skip-packaging-tests.patch
 # The test_utils module can no longer be imported from asyncio
 # and is undocumented intentionaly because it's private.
@@ -136,6 +136,9 @@ PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/b
 
 
 %changelog
+* Wed Feb 20 2019 Yatin Karel <ykarel@redhat.com> - 18.8.1-1
+- Update to 18.8.1
+
 * Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 18.7.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
