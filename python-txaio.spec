@@ -1,5 +1,9 @@
 %global pypi_name txaio
 
+%if 0%{?fedora} || 0%{?rhel} > 7
+%global with_python3 1
+%endif
+
 Name:           python-%{pypi_name}
 Version:        18.8.1
 Release:        1%{?dist}
@@ -19,12 +23,21 @@ BuildRequires:  python2-devel
 BuildRequires:  python2-pytest >= 2.6.4
 BuildRequires:  python2-pytest-cov >= 1.8.1
 BuildRequires:  python2-mock >= 1.3.0
+%if 0%{?fedora} || 0%{?rhel} > 7
 BuildRequires:  python2-pep8 >= 1.6.2
+%else
+# lowering requirement as we don't have >= 1.6.2
+BuildRequires:  python-pep8 >= 1.5.7
+%endif
 BuildRequires:  python2-sphinx >= 1.2.3
 BuildRequires:  python2-sphinx_rtd_theme
 BuildRequires:  python2-six
 BuildRequires:  python2-twisted >= 12.1.0
+%if 0%{?fedora} || 0%{?rhel} > 7
 BuildRequires:  python2-zope-interface >= 3.6
+%else
+BuildRequires:  python-zope-interface >= 3.6
+%endif
 BuildRequires:  python2-trollius >= 2.0
 BuildRequires:  python2-futures >= 3.0.3
 BuildRequires:  python2-enchant >= 1.6.6
@@ -39,7 +52,11 @@ asyncio.
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 BuildArch:      noarch
 Requires:       python2-twisted >= 12.1.0
+%if 0%{?fedora} || 0%{?rhel} > 7
 Requires:       python2-zope-interface >= 3.6
+%else
+Requires:       python-zope-interface >= 3.6
+%endif
 Requires:       python2-trollius >= 2.0
 Requires:       python2-futures >= 3.0.3
 Requires:       python2-six
@@ -50,6 +67,7 @@ Helper library for writing code that runs unmodified on both Twisted and
 asyncio.
 
 
+%if 0%{?with_python3}
 %package -n     python3-%{pypi_name}
 Summary:        Compatibility API between asyncio/Twisted/Trollius
 BuildArch:      noarch
@@ -68,6 +86,7 @@ Requires:       python3-six
 %description -n python3-%{pypi_name}
 Helper library for writing code that runs unmodified on both Twisted and
 asyncio.
+%endif
 
 
 %package doc
@@ -94,7 +113,9 @@ cp -a README.rst docs/index.rst
 
 %build
 %py2_build
+%if 0%{?with_python3}
 %py3_build
+%endif
 
 # Build documentation
 cd docs && make html
@@ -109,11 +130,15 @@ ln -s /usr/share/javascript/jquery/latest/jquery.min.js _build/html/_static/jque
 
 %install
 %py2_install
+%if 0%{?with_python3}
 %py3_install
+%endif
 
 
 %check
+%if 0%{?with_python3}
 PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage3 run -p --source=txaio /usr/bin/py.test-%{python3_version} -s
+%endif
 PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/bin/py.test-%{python2_version} -s
 
 
@@ -123,11 +148,13 @@ PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/test coverage2 run -p --source=txaio /usr/b
 %{python2_sitelib}/%{pypi_name}-%{version}-py%{python2_version}.egg-info/
 %{python2_sitelib}/%{pypi_name}/
 
+%if 0%{?with_python3}
 %files -n python3-%{pypi_name}
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/%{pypi_name}-%{version}-py%{python3_version}.egg-info/
 %{python3_sitelib}/%{pypi_name}/
+%endif
 
 
 %files doc
